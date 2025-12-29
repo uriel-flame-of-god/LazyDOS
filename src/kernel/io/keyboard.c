@@ -81,27 +81,27 @@ static void update_modifiers(uint8_t sc)
 
 char lazy_getchar(void)
 {
-    uint8_t sc;
     char c;
-    while (!(c = lazy_trygetchar())) {
-        sc = get_sc();
-        update_modifiers(sc);
-    }
+    while (!(c = lazy_trygetchar()))
+        ;   /* spin like COMMAND.COM */
     return c;
 }
+
 
 char lazy_trygetchar(void)
 {
     if (!data_waiting()) return 0;
+
     uint8_t sc = inb(PS2_DATA);
     update_modifiers(sc);
 
-    if (sc & 0x80) return 0;          /* break code */
-    if (sc >= 128) return 0;          /* unknown */
+    if (sc & 0x80) return 0;
+    if (sc >= 128) return 0;
 
     const char *tbl = state.shift ? shifted : normal;
     return tbl[sc];
 }
+
 
 int lazy_is_ctrl_alt_del(void)
 {

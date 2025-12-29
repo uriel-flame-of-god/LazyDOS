@@ -1,2 +1,48 @@
+# Build artifacts
 *.iso
 *.elf
+*.bin
+
+# Object files recursively
+**/*.o
+**/*.d
+
+# Temporary files
+*~
+*.swp
+*.swo
+
+# IDE specific files
+.vscode/
+.idea/
+*.code-workspace
+
+# QEMU/Bochs artifacts
+*.qcow2
+*.img
+*.vmdk
+*.vdi
+bochsrc.txt
+bochsout.txt
+
+# ISO directory contents (except config files)
+iso/boot/kernel.elf
+
+# Backup files
+*.bak
+*.old
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Makefile artifacts
+*.d
+*.i
+*.ii
+*.s

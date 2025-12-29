@@ -18,6 +18,7 @@
 - [Running the System](#running-the-system)
 - [Architecture Overview](#architecture-overview)
 - [Known Issues (We're Too Lazy to Fix)](#known-issues-were-too-lazy-to-fix)
+- [Recent Fixes & Current Status](#recent-fixes--current-status)
 - [Contributing (If You Must)](#contributing-if-you-must)
 - [FAQ (Frequently Avoided Questions)](#faq-frequently-avoided-questions)
 - [License](#license)
@@ -171,7 +172,7 @@ bochs -q
 - **port.c**: I/O port helpers (actually works! Direct hardware access, just like DOS)
 
 #### Applications (If You Can Call Them That)
-- **calculator.c**: Stack-based calculator (like QBASIC but with fewer features)
+- **calculator.c**: Stack-based calculator (like QBASIC but with fewer features) - *Currently broken, see below*
 - **calculator.h**: Header file (contains declarations, probably)
 
 #### Libc Subset (The Bare Minimum)
@@ -189,9 +190,9 @@ bochs -q
 ## 🐛 Known Issues (We're Too Lazy to Fix)
 
 ### Critical Issues (Might Actually Matter)
-1. **Input Handling**: The TTY doesn't always echo characters correctly (just like early DOS versions)
-2. **Backspace**: Sometimes works, sometimes doesn't (50/50 chance, authentic retro experience)
-3. **Calculator**: Division by zero might crash (or might not, who knows? Just like in DOS)
+1. **Calculator**: The calculator app is currently broken - it compiles but crashes or gives incorrect results (very authentic to early DOS math libraries)
+2. **Input Handling**: The TTY doesn't always echo characters correctly (just like early DOS versions)
+3. **Backspace**: Sometimes works, sometimes doesn't (50/50 chance, authentic retro experience)
 4. **Memory**: No proper memory manager (just allocate and hope, very DOS-like)
 
 ### Minor Issues (Probably Fine)
@@ -206,6 +207,35 @@ bochs -q
 3. **"Works on My Machine" Mentality**: If it boots once, it's production-ready (a DOS tradition)
 4. **Direct Hardware Access**: If you can't poke the hardware directly, what's the point? (The DOS way)
 
+## ✅ Recent Fixes & Current Status
+
+### What's Working Now:
+- ✅ **TTY Shell**: The integrated shell now works properly! You can type commands and see them echoed correctly
+- ✅ **Command Input**: Basic command input and backspace handling is functional
+- ✅ **Help System**: All built-in commands except calculator are accessible
+- ✅ **System Commands**: `help`, `cfetch`, `info`, `reboot`, `shutdown`, `clear`, `echo` all work
+- ✅ **Basic I/O**: VGA output and keyboard input are stable
+
+### What's Still Broken:
+- ❌ **Calculator App**: The calculator application (`calc` command) is currently non-functional. It may:
+  - Crash the system
+  - Give incorrect results
+  - Refuse to start entirely
+  - Or any combination of the above
+  
+  *This is authentic to the early DOS experience where bundled applications were often buggy and incomplete.*
+
+- ⚠️ **Edge Cases**: Various edge cases in input handling may still exist
+
+### Fixing the Calculator (Community Challenge):
+The calculator is broken in the true LazyDOS spirit - it's there, it compiles, but it doesn't work properly. This is your chance to:
+
+1. **Fix it yourself** (if you're feeling ambitious)
+2. **Ignore it** (if you're feeling lazy)
+3. **Complain about it** (if you're feeling traditional)
+
+The source is in `src/kernel/apps/calculator.c` - go wild! Or don't. We're not your boss.
+
 ## 🤝 Contributing (If You Must)
 
 We welcome contributions, as long as they don't require too much work:
@@ -218,6 +248,7 @@ We welcome contributions, as long as they don't require too much work:
 
 ### What We Accept
 - Bug fixes (if they're trivial and don't add complexity)
+- Calculator fixes (seriously, someone fix this thing)
 - New features (if they require < 50 lines of code and feel DOS-like)
 - Documentation improvements (if they're funny and concise)
 - Spelling fixes (maybe)
@@ -230,8 +261,11 @@ We welcome contributions, as long as they don't require too much work:
 
 ## ❓ FAQ (Frequently Avoided Questions)
 
+### Q: Why doesn't the calculator work?
+**A**: It's authentic! Early versions of DOS had buggy utilities too. Consider it a feature - the "broken calculator" is our tribute to the days when software came with personality (and bugs). Feel free to fix it yourself!
+
 ### Q: Why doesn't the keyboard input work properly?
-**A**: It's authentic! Early versions of DOS had input quirks too. We're honoring tradition.
+**A**: It's authentic! Early versions of DOS had input quirks too. We're honoring tradition. (Actually, we mostly fixed this one, but there might still be edge cases.)
 
 ### Q: Is there memory protection?
 **A**: Memory protection is for operating systems that don't trust their applications. MS-DOS trusted everyone, and so do we.
@@ -257,7 +291,6 @@ We welcome contributions, as long as they don't require too much work:
 ### Q: Why should I use LazyDOS instead of FreeDOS?
 **A**: FreeDOS tries to be compatible with MS-DOS. LazyDOS tries to capture the *spirit* of MS-DOS - the simplicity, the directness, the "figure it out yourself" attitude.
 
-
 ## 🙏 Acknowledgments
 
 - **MS-DOS**: For showing us that simple can be beautiful
@@ -276,6 +309,8 @@ LazyDOS isn't trying to be the next Linux or Windows. It's trying to capture tha
 **We're not lazy. We're minimalist.** We're not cutting corners. We're removing unnecessary complexity. We're not ignoring best practices. We're prioritizing understandability over abstraction.
 
 In a world of million-line kernels and layers of abstraction, sometimes you just want to `MOV AX, 0x13` and see something happen. That's the spirit of LazyDOS.
+
+**P.S. The calculator is broken. You might want to fix that. Or not. We're not judging.**
 
 Happy hacking! (Or not, if you'd rather just appreciate the simplicity)
 
