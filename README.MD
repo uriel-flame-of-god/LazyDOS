@@ -1,38 +1,41 @@
-# LazyDOS - The "It Works Sometimes" Operating System
+# LazyDOS - The "Elegantly Simple" Operating System
 
-![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.1-lazy?style=for-the-badge)
+![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.3-lazy?style=for-the-badge)
 ![License: GPL v3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Philosophy: Simplicity](https://img.shields.io/badge/Philosophy-Simplicity-blue.svg)
 ![Inspiration: MS-DOS](https://img.shields.io/badge/Inspiration-MS--DOS-00ff00.svg)
+![Calculator: Working!](https://img.shields.io/badge/Calculator-✅_Working-green.svg)
 
-> "Why reinvent the wheel when you can just push the car?"
+> "Why make it complicated when simple works?"
 > 
 > *Inspired by the beautiful simplicity of MS-DOS*
 
 ## 📋 Table of Contents
 - [The LazyDOS Philosophy](#the-lazydos-philosophy)
 - [Name Origin](#-name-origin-not-laziness-but-simplicity)
+- [What's New in v0.0.3](#-whats-new-in-v003)
+- [🧮 LazyCalculator: The Star of v0.0.3](#-lazydos-applications)
 - [System Requirements](#system-requirements)
 - [Quick Start](#quick-start)
 - [Building from Source](#building-from-source)
 - [Running the System](#running-the-system)
 - [Architecture Overview](#architecture-overview)
-- [Known Issues (We're Too Lazy to Fix)](#known-issues-were-too-lazy-to-fix)
-- [Recent Fixes & Current Status](#recent-fixes--current-status)
+- [Known Issues](#known-issues)
+- [Current Status](#-current-status-what-works-now)
 - [Contributing (If You Must)](#contributing-if-you-must)
 - [FAQ (Frequently Avoided Questions)](#faq-frequently-avoided-questions)
 - [License](#license)
 
 ## 🦥 The LazyDOS Philosophy
 
-LazyDOS is built on one simple principle: **Developers are lazy, so let them be**. Unlike other operating systems that force you to implement everything "properly," LazyDOS embraces the chaos. Here's what that means:
+LazyDOS is built on one simple principle: **Elegant simplicity over unnecessary complexity**. Unlike other operating systems that bury you in abstractions, LazyDOS embraces directness. Here's what that means:
 
-- **No IDT?** Perfect! Implement your own interrupt handling!
-- **GDT kinda works?** Good enough!
-- **Input handling broken?** Someone else will fix it eventually!
-- **Memory management?** Just allocate somewhere and hope for the best!
+- **Direct hardware access**: Talk to the hardware like in the good old days
+- **Understandable code**: You can read and understand the entire system
+- **No bloat**: If it's not essential, it's not included
+- **Developer freedom**: The system gets out of your way so you can do real work
 
-We believe in **"Lazy Open Source"** - we provide the bare minimum, and the community can either fix it or live with it. It's not a bug; it's a feature!
+We believe in **"Minimalist Open Source"** - we provide a clean, simple foundation that you can understand and build upon. It's not about being lazy; it's about being efficient!
 
 ## 🏷️ Name Origin: Not Laziness, But Simplicity
 
@@ -48,273 +51,325 @@ Back in the golden age of computing (when memory was measured in kilobytes and c
 ### Why "Lazy"DOS?
 We call it **LazyDOS** because:
 1. **MS-DOS was "lazy" in a good way** - it didn't overcomplicate things
-2. **It gets out of your way** - like a lazy butler who knows when not to bother you
+2. **It gets out of your way** - like a minimalist butler who knows when not to bother you
 3. **It embraces simplicity** - the "laziness" of elegant design
 4. **It's approachable** - you don't need a PhD to understand it
 
-Think of it as **MS-DOS's minimalist cousin who took a nap and woke up in the 21st century**. We're not lazy; we're *efficiently minimalist*.
+Think of it as **MS-DOS's minimalist cousin who woke up in the 21st century**. We're not lazy; we're *efficiently minimalist*.
+
+## 🎉 What's New in v0.0.3
+
+### Major Feature: LazyCalculator is Born! 🧮
+The broken calculator from previous versions has been completely reimagined and reborn as **LazyCalculator** - a simple, reliable, integer-only calculator that actually works!
+
+## 🧮 LazyDOS Applications
+
+### LazyCalculator (NEW in v0.0.3)
+Meet LazyCalculator - the simple, reliable calculator that does exactly what you need and nothing more:
+
+#### **Key Features:**
+- **Integer-only operations**: No floating-point complexity
+- **Left-to-right evaluation**: Simple and predictable
+- **Basic arithmetic**: `+` `-` `*` `/` - all the essentials
+- **Safe division**: Division by zero protection built-in
+- **No crashes**: Proper error handling throughout
+- **No reboots needed**: Stable and reliable
+- **Clean interface**: Type `calc` and start calculating
+
+#### **How to Use:**
+```
+LazyDOS> calc
+Welcome to LazyCalculator v1.0
+Enter expressions like: 5 + 3 * 2
+Type 'exit' to return to shell
+
+calc> 10 + 5 * 2
+Result: 30
+
+calc> 20 / 4
+Result: 5
+
+calc> 10 / 0
+Error: Division by zero!
+
+calc> exit
+Returning to LazyDOS...
+```
+
+#### **Design Philosophy:**
+LazyCalculator embodies the LazyDOS philosophy:
+1. **Simple**: No complex precedence rules (strict left-to-right)
+2. **Reliable**: No crashes, proper error messages
+3. **Understandable**: You can read the entire source in 5 minutes
+4. **Useful**: Does the job without unnecessary features
+
+### Project Structure Cleanup
+```
+src/
+├── bootloader/
+│   └── boot.asm
+└── kernel/
+    ├── apps/
+    │   ├── calculator.c    # ✅ LazyCalculator - Simple & Working!
+    │   └── calculator.h
+    ├── core/
+    │   ├── gdt.c
+    │   ├── gdt.h
+    │   ├── kernel.c
+    │   ├── tty.c
+    │   └── tty.h
+    ├── io/
+    │   ├── keyboard.c
+    │   ├── keyboard.h
+    │   ├── port.c
+    │   ├── port.h
+    │   ├── vga.c
+    │   └── vga.h
+    └── lib/
+        ├── float.c
+        ├── float.h
+        ├── int.c
+        ├── int.h
+        ├── string.c
+        └── string.h
+```
+
+### Enhanced Stability
+- Improved TTY input handling
+- Better error messages throughout the system
+- More robust command parsing
+- Proper integer overflow handling in calculator
 
 ## 🖥️ System Requirements
 
-### Minimal (It Might Boot)
+### Minimal (It Will Boot)
 - **CPU**: i486 or better (or worse, we don't judge)
 - **RAM**: 640 KB conventional memory (we're nostalgic like that)
 - **Bootloader**: Anything that supports Multiboot 1.0 (or pretends to)
-- **Patience**: Lots of it
+- **Patience**: A moderate amount
 
-### Recommended (It Might Actually Work)
+### Recommended (It Will Work Well)
 - **CPU**: Anything made after 1995
 - **RAM**: At least 1 MB (so we have somewhere to put our stack)
-- **Emulator**: QEMU or Bochs (because testing on real hardware is too much work)
-- **Expectations**: Extremely low
-- **Nostalgia**: For the days when software fit on a single floppy
+- **Emulator**: QEMU or Bochs (because why not?)
+- **Expectations**: Realistic but positive
+- **Nostalgia**: For the days when software was understandable
 
 ## 🚀 Quick Start
 
-### For the Impatient (Our Target Audience)
+### For the Impatient
 
 ```bash
-# Clone the repository (if you can be bothered)
+# Clone the repository
 git clone https://github.com/uriel-flame-of-god/LazyDOS.git
 cd lazydos
 
-# Try to build it (no guarantees)
+# Build it (it actually works now)
 make
 
-# Run it and pray
+# Run it and try the new calculator!
 make run
+
+# Once booted, type:
+LazyDOS> calc
 ```
 
 ## 🔨 Building from Source
 
-### Step 1: Get the Tools (If You Must)
+### Step 1: Get the Tools
 
 You'll need:
-- **NASM** (because assembly is too mainstream for GCC)
-- **GCC Cross-Compiler** (i686-elf target, because we're special)
-- **Make** (or just run commands manually, we don't care)
+- **NASM** (for the bootloader)
+- **GCC Cross-Compiler** (i686-elf target)
+- **Make** (or patience to run commands manually)
 
 ### Step 2: The Build Process
 
 ```bash
-# Option A: Use the Makefile (recommended for lazy people)
+# The easy way (recommended)
 make all
 
-# Option B: Do it manually (for masochists)
+# Or step by step
 nasm -f elf32 src/bootloader/boot.asm -o boot.o
 i686-elf-gcc -c src/kernel/core/kernel.c -o kernel.o -ffreestanding -O2
-# ... (compile 20 more files)
-# ... (link them together with magic incantations)
+# ... and so on
 ```
 
 ### Step 3: Create the ISO
 
 ```bash
-# Our sophisticated ISO creation process
+# Create bootable ISO
 make iso
 
-# This creates: lazydos.iso
-# File size: Approximately "good enough" bytes
+# Output: lazydos.iso
+# Size: Compact and efficient, just like DOS
 ```
 
 ## 🏃 Running the System
 
-### In QEMU (The Easy Way)
+### In QEMU (Recommended)
 
 ```bash
 # Basic run
 make run
 
-# With debug output (for when it doesn't work)
+# With debug output
 make debug
 
-# With more RAM (because why not)
+# With custom memory
 qemu-system-i386 -cdrom lazydos.iso -m 128M
 ```
 
-### In Bochs (For the Purists)
+### In Bochs (For Authenticity)
 
 ```bash
-# Create a bochsrc.txt with something like:
-# memory: guest=128, host=128
-# romimage: file=$BXSHARE/BIOS-bochs-latest
-# vgaromimage: file=$BXSHARE/VGABIOS-lgpl-latest
-# floppya: 1_44=lazydos.iso, status=inserted
-# boot: cdrom
-# Then run:
-bochs -q
+# Configure and run
+bochs -q -f bochsrc.txt
 ```
 
-### On Real Hardware (Not Recommended)
-
-1. Burn ISO to CD/DVD/USB (using your favorite tool)
+### On Real Hardware (Adventurous)
+1. Burn ISO to USB/CD
 2. Boot from it
-3. Watch it fail spectacularly
-4. Go back to using QEMU
+3. Enjoy the simplicity (and try the calculator!)
 
 ## 🏗️ Architecture Overview
 
-### Boot Process (The Part That Actually Works)
-1. **boot.asm**: Multiboot header + stack setup (inspired by the simple boot sectors of old)
-2. **GDT**: Global Descriptor Table (kinda works, just like in the good old days)
-3. **Kernel Entry**: Jumps to C code (usually)
+### Boot Process (Simple and Reliable)
+1. **boot.asm**: Multiboot header + basic setup
+2. **GDT**: Global Descriptor Table (works properly)
+3. **Kernel Entry**: Clean jump to C code
 
 ### Kernel Components
 
-#### Core (Mostly Functional)
-- **kernel.c**: Entry point, calls TTY (the real MVP, like COMMAND.COM but simpler)
-- **gdt.c**: Sets up segmentation (or tries to, with MS-DOS simplicity)
-- **tty.c**: Integrated shell (where you'll spend 99% of your time, just like in DOS)
+#### Core (Functional and Clean)
+- **kernel.c**: Main entry point, initializes everything
+- **gdt.c**: Segmentation setup (simple but effective)
+- **tty.c**: Integrated shell (where the magic happens)
 
-#### I/O Drivers (Works Sometimes)
-- **vga.c**: Text mode driver (80×25, because that's what MS-DOS used)
-- **keyboard.c**: PS/2 keyboard driver (set 1, because that's what worked in DOS)
-- **port.c**: I/O port helpers (actually works! Direct hardware access, just like DOS)
+#### I/O Drivers (They Work)
+- **vga.c**: Text mode driver (80×25, classic and reliable)
+- **keyboard.c**: PS/2 keyboard driver (responsive)
+- **port.c**: I/O port helpers (actually useful)
 
-#### Applications (If You Can Call Them That)
-- **calculator.c**: Stack-based calculator (like QBASIC but with fewer features) - *Currently broken, see below*
-- **calculator.h**: Header file (contains declarations, probably)
+#### Applications (Useful and Working!)
+- **calculator.c**: LazyCalculator - simple integer arithmetic (✅ **FULLY WORKING!**)
+- Left-to-right evaluation with error handling
 
-#### Libc Subset (The Bare Minimum)
-- **string.c**: strlen, memcpy, memset (but not all work correctly, reminiscent of early C libraries)
-- **string.h**: Header with duplicate declarations (we were efficient, not lazy)
+#### Libc Subset (Just Enough)
+- **string.c**: Essential string functions
+- **int.c**: Integer utilities for the calculator
 
-### Memory Map (Approximate)
-```
-0x00000000 - 0x0009FFFF: Conventional memory (just like DOS wanted)
-0x000A0000 - 0x000BFFFF: Video memory (VGA text buffer at 0xB8000, DOS style)
-0x00100000 - 0x00EFFFFF: Extended memory (if we ever use it, unlike DOS)
-0x01000000+:           : Somewhere over there (future expansion, maybe)
-```
+## 🐛 Known Issues
 
-## 🐛 Known Issues (We're Too Lazy to Fix)
+### Minor Quirks (DOS Had Them Too)
+1. **Backspace**: Works but might have edge cases
+2. **Memory**: Still no advanced memory manager (by design)
+3. **No multitasking**: Single-tasking, just like early DOS
 
-### Critical Issues (Might Actually Matter)
-1. **Calculator**: The calculator app is currently broken - it compiles but crashes or gives incorrect results (very authentic to early DOS math libraries)
-2. **Input Handling**: The TTY doesn't always echo characters correctly (just like early DOS versions)
-3. **Backspace**: Sometimes works, sometimes doesn't (50/50 chance, authentic retro experience)
-4. **Memory**: No proper memory manager (just allocate and hope, very DOS-like)
+### Philosophical Choices (Not Bugs)
+1. **No IDT**: Interrupts handled simply
+2. **No PMM/VMM**: Direct memory access
+3. **No ACPI**: Simplicity over power management
 
-### Minor Issues (Probably Fine)
-1. **No IDT**: Interrupts? What interrupts? (DOS didn't need fancy interrupt handling)
-2. **No PMM**: Physical Memory Manager? Just use the first free address! (That's how DOS did it)
-3. **No VMM**: Virtual Memory? We barely have physical memory! (True to the DOS spirit)
-4. **No ACPI**: Advanced Configuration and Power Interface? Too advanced! (DOS never heard of it)
+## ✅ Current Status: What Works Now
 
-### Philosophical Issues (Features, Not Bugs)
-1. **Simplicity First**: We don't add features unless absolutely necessary (like MS-DOS)
-2. **Minimal Documentation**: This README is already too long (DOS manuals were concise too)
-3. **"Works on My Machine" Mentality**: If it boots once, it's production-ready (a DOS tradition)
-4. **Direct Hardware Access**: If you can't poke the hardware directly, what's the point? (The DOS way)
+### Fully Functional:
+- ✅ **TTY Shell**: Complete with command history and editing
+- ✅ **Command Suite**: All commands work:
+  - `help` - Shows available commands
+  - `cfetch` - System information display
+  - `info` - Detailed system info
+  - `reboot` - Restarts the system
+  - `shutdown` - Powers off (in emulator)
+  - `clear` - Clears the screen
+  - `echo` - Echoes text back
+  - `calc` - 🧮 **LazyCalculator (FULLY WORKING!)**
+- ✅ **I/O Systems**: VGA output and keyboard input
+- ✅ **Basic Utilities**: String and math functions
 
-## ✅ Recent Fixes & Current Status
+### LazyCalculator (The Star of v0.0.3):
+The calculator has been completely reworked into a reliable, simple tool:
+- **Integer-only**: No floating point complexity
+- **Left-to-right evaluation**: Simple and predictable
+- **Safe operations**: Division by zero protection
+- **Error handling**: Clear error messages, no crashes
+- **Clean interface**: Easy to use, easy to understand
 
-### What's Working Now:
-- ✅ **TTY Shell**: The integrated shell now works properly! You can type commands and see them echoed correctly
-- ✅ **Command Input**: Basic command input and backspace handling is functional
-- ✅ **Help System**: All built-in commands except calculator are accessible
-- ✅ **System Commands**: `help`, `cfetch`, `info`, `reboot`, `shutdown`, `clear`, `echo` all work
-- ✅ **Basic I/O**: VGA output and keyboard input are stable
+## 🤝 Contributing (Welcome!)
 
-### What's Still Broken:
-- ❌ **Calculator App**: The calculator application (`calc` command) is currently non-functional. It may:
-  - Crash the system
-  - Give incorrect results
-  - Refuse to start entirely
-  - Or any combination of the above
-  
-  *This is authentic to the early DOS experience where bundled applications were often buggy and incomplete.*
-
-- ⚠️ **Edge Cases**: Various edge cases in input handling may still exist
-
-### Fixing the Calculator (Community Challenge):
-The calculator is broken in the true LazyDOS spirit - it's there, it compiles, but it doesn't work properly. This is your chance to:
-
-1. **Fix it yourself** (if you're feeling ambitious)
-2. **Ignore it** (if you're feeling lazy)
-3. **Complain about it** (if you're feeling traditional)
-
-The source is in `src/kernel/apps/calculator.c` - go wild! Or don't. We're not your boss.
-
-## 🤝 Contributing (If You Must)
-
-We welcome contributions, as long as they don't require too much work:
+We welcome contributions that maintain our philosophy of simplicity:
 
 ### Contribution Guidelines
-1. **Fork it** (if you can be bothered)
-2. **Make minimal changes** (the less code, the better - DOS was small for a reason)
-3. **Don't break the "simple" philosophy** (no over-engineering! Keep it DOS-like)
-4. **Submit a PR** (or just email us the patch, whatever)
+1. **Keep it simple**: If it adds complexity without clear benefit, reconsider
+2. **Understandable code**: Comments and clear logic are appreciated
+3. **DOS-like spirit**: Direct, efficient, and minimal
+4. **Test it**: Make sure it doesn't break existing functionality
 
-### What We Accept
-- Bug fixes (if they're trivial and don't add complexity)
-- Calculator fixes (seriously, someone fix this thing)
-- New features (if they require < 50 lines of code and feel DOS-like)
-- Documentation improvements (if they're funny and concise)
-- Spelling fixes (maybe)
+### What We're Looking For:
+- Simple utilities in the DOS tradition
+- Documentation improvements
+- Bug fixes (especially edge cases)
+- Performance improvements that don't add complexity
 
-### What We Don't Accept
-- Complete rewrites (too much work, and DOS never rewrote itself)
-- "Best practices" (we have our own practices, just like DOS did)
-- Unit tests (testing is for people who care; DOS trusted its developers)
-- Performance optimizations (if it's slow, get a faster computer - the DOS solution)
+### What to Avoid:
+- Over-engineering
+- Unnecessary abstractions
+- Breaking the simplicity philosophy
 
-## ❓ FAQ (Frequently Avoided Questions)
+## ❓ FAQ (Frequently Asked Questions)
 
-### Q: Why doesn't the calculator work?
-**A**: It's authentic! Early versions of DOS had buggy utilities too. Consider it a feature - the "broken calculator" is our tribute to the days when software came with personality (and bugs). Feel free to fix it yourself!
+### Q: Is the calculator really fixed?
+**A**: Yes! v0.0.3 features **LazyCalculator** - a completely new, reliable, integer-only calculator that actually works!
 
-### Q: Why doesn't the keyboard input work properly?
-**A**: It's authentic! Early versions of DOS had input quirks too. We're honoring tradition. (Actually, we mostly fixed this one, but there might still be edge cases.)
+### Q: Why integer-only and left-to-right evaluation?
+**A**: Simplicity and predictability. Like early DOS calculators, we keep it simple and understandable. No complex precedence rules to remember.
 
-### Q: Is there memory protection?
-**A**: Memory protection is for operating systems that don't trust their applications. MS-DOS trusted everyone, and so do we.
+### Q: What if I divide by zero?
+**A**: LazyCalculator handles it gracefully with a clear error message. No crashes, no reboots needed.
 
-### Q: Can I run GUI applications?
-**A**: We're focusing on text mode, just like DOS 1.0 through 6.22. If you want graphics, write your own driver (just like in the DOS days).
+### Q: Can I run this on real hardware?
+**A**: Yes! LazyDOS should work on any x86 system that supports legacy boot. QEMU is recommended for development.
 
-### Q: Is this production-ready?
-**A**: It boots sometimes. MS-DOS 1.0 was less stable, and look how that turned out!
+### Q: Is there a filesystem?
+**A**: Not yet. Like very early DOS versions, we're focusing on core functionality first. LazyCalculator was our priority for v0.0.3.
 
-### Q: Why GPL v3.0?
-**A**: Because we want you to share your fixes, but we're too busy being simple to enforce it.
+### Q: Why no operator precedence in the calculator?
+**A**: Left-to-right evaluation is simpler to implement and understand. It's a deliberate design choice for simplicity.
 
-### Q: How do I report bugs?
-**A**: Don't. MS-DOS didn't have bug trackers either. You just learned to work around them.
-
-### Q: Can I use this for my mission-critical system?
-**A**: Only if your mission is to have a system with the elegant simplicity of early personal computing.
-
-### Q: Is there networking support?
-**A**: Networking requires packets. Packets require effort. MS-DOS didn't have built-in networking either until much later.
-
-### Q: Why should I use LazyDOS instead of FreeDOS?
-**A**: FreeDOS tries to be compatible with MS-DOS. LazyDOS tries to capture the *spirit* of MS-DOS - the simplicity, the directness, the "figure it out yourself" attitude.
+### Q: What's next for LazyDOS?
+**A**: We're considering:
+- Simple filesystem (A very simplified FAT32, might even call it LazyFS)
+- Basic text editor
+- More utilities in the DOS tradition
+- Perhaps a simple game (if it fits the minimalist philosophy)
 
 ## 🙏 Acknowledgments
 
-- **MS-DOS**: For showing us that simple can be beautiful
-- **Tim Paterson**: For writing QDOS (which became MS-DOS) in just 4 months
-- **IBM PC**: For giving us a simple hardware platform to target
-- **Multiboot Specification**: For making bootloading someone else's problem
-- **QEMU Developers**: For making it easy to test without real hardware
-- **The 80×25 Text Mode**: For being simple enough that even we could implement it
-- **Caffeine**: The real MVP
-- **Procrastination**: Our chief architectural advisor
+- **MS-DOS**: For the inspiration of simplicity
+- **Tim Paterson**: For QDOS, the simple foundation
+- **IBM PC**: For a straightforward hardware platform
+- **Multiboot Specification**: For bootloading simplicity
+- **QEMU Developers**: For making testing easy
+- **The Retro Computing Community**: For keeping the spirit alive
 
 ## 🎯 Final Thoughts
 
-LazyDOS isn't trying to be the next Linux or Windows. It's trying to capture that beautiful moment in computing history when an operating system was simple enough that one person could understand it all, direct enough that you could talk to the hardware yourself, and practical enough that it powered the personal computing revolution.
+LazyDOS v0.0.3 represents a significant milestone: we now have a useful application that embodies our philosophy. LazyCalculator isn't just a fixed calculator - it's a statement about what we believe in:
 
-**We're not lazy. We're minimalist.** We're not cutting corners. We're removing unnecessary complexity. We're not ignoring best practices. We're prioritizing understandability over abstraction.
+1. **Simplicity**: Integer-only, left-to-right evaluation
+2. **Reliability**: Proper error handling, no crashes
+3. **Usefulness**: Does the job without unnecessary complexity
+4. **Understandability**: You can read and understand the entire implementation
 
-In a world of million-line kernels and layers of abstraction, sometimes you just want to `MOV AX, 0x13` and see something happen. That's the spirit of LazyDOS.
+In a world of bloated software with countless features you'll never use, LazyCalculator is a breath of fresh air. It does one thing, and does it well.
 
-**P.S. The calculator is broken. You might want to fix that. Or not. We're not judging.**
+**Try it. Type `calc`. Experience the joy of software that just works, simply.**
 
-Happy hacking! (Or not, if you'd rather just appreciate the simplicity)
+Happy calculating! (And remember: 10 + 5 * 2 = 30, because we evaluate left-to-right!)
 
 ---
 *"Simplicity is the ultimate sophistication." - Leonardo da Vinci*
 *"640K ought to be enough for anybody." - Bill Gates (allegedly)*
-*"The less we do, the more we achieve." - The LazyDOS Development Team* (and by the Team I mean Me, Myself and I)
+*"Make it work, make it right, make it simple." - The LazyDOS Philosophy*
+
+**LazyDOS v0.0.3 - Now with LazyCalculator: Simple, Reliable, and Actually Works!** 🧮

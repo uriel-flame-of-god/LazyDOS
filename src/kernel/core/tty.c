@@ -6,14 +6,27 @@
 #include "../io/port.h"
 #include <stdbool.h>
 
-#define PROMPT  "BetterDOS> "
+#define PROMPT  "LazyDOS> "
 #define BUF_SZ  256
 
 static char input[BUF_SZ];
 
 /*  ----------  helpers  ----------  */
 static void print(const char *s) { terminal_writestring(s); }
-static void println(const char *s){ print(s); terminal_putchar('\n'); }
+static void println(const char *s){ terminal_writestring(s); terminal_putchar('\n'); }
+static void pr_ok(const char *s) {
+    terminal_setcolor(VGA_COLOR_GREEN);   terminal_writestring(s);
+    terminal_setcolor(VGA_COLOR_LIGHT_GREY);
+}
+static void pr_ok_nl(const char *s) {
+    pr_ok(s);
+    terminal_putchar('\n');
+}
+static void rtrim(char *s) {
+    char *p = s;
+    while (*p) p++;
+    while (p > s && p[-1] == ' ') *--p = '\0';
+}
 
 /*  ----------  commands  ----------  */
 static void cmd_help(void)
@@ -32,16 +45,16 @@ static void cmd_help(void)
 static void cmd_cfetch(void)
 {
     /*  logo:  LDOS  (matching your ASCII)  */
-    println("     ##:::::::'########:::'#######:::'######::");
-    println("     ##::::::: ##.... ##:'##.... ##:'##... ##:");
-    println("     ##::::::: ##:::: ##: ##:::: ##: ##:::..::");
-    println("     ##::::::: ##:::: ##: ##:::: ##:. ######::");
-    println("     ##::::::: ##:::: ##: ##:::: ##::..... ##:");
-    println("     ##::::::: ##:::: ##: ##:::: ##:'##::: ##:");
-    println("     ########: ########::. #######::. ######::");
-    println("     ........::........::::.......::::......:::");
+    pr_ok_nl("     ##:::::::'########:::'#######:::'######::");
+    pr_ok_nl("     ##::::::: ##.... ##:'##.... ##:'##... ##:");
+    pr_ok_nl("     ##::::::: ##:::: ##: ##:::: ##: ##:::..::");
+    pr_ok_nl("     ##::::::: ##:::: ##: ##:::: ##:. ######::");
+    pr_ok_nl("     ##::::::: ##:::: ##: ##:::: ##::..... ##:");
+    pr_ok_nl("     ##::::::: ##:::: ##: ##:::: ##:'##::: ##:");
+    pr_ok_nl("     ########: ########::. #######::. ######::");
+    pr_ok_nl("     ........::........::::.......::::......:::");
     println("");
-    println("LazyDOS v0.1        –  works well enough");
+    println("LazyDOS v0.1        -  works well enough");
     println("CPU : i486 (probably)");
     println("RAM : 640 KB conventional");
     println("Boot: Multiboot");
@@ -70,7 +83,7 @@ static void cmd_reboot(void)
 
 static void cmd_shutdown(void)
 {
-    println("Shutdown – please power-off manually.");
+    println("Shutdown - please power-off manually.");
     /* QEMU/BOCHS shortcut if you want: outw(0x604, 0x2000); */
     for(;;) asm volatile ("hlt");
 }
@@ -120,11 +133,11 @@ static void run_cmd(void)
 void tty_main(void)
 {
     terminal_initialize();
-    println("LazyDOS TTY – integrated shell");
+    println("LazyDOS TTY - integrated shell");
     println("Type 'help' for commands");
 
     for (;;) {
-        print(PROMPT);
+        pr_ok(PROMPT);
         size_t i = 0;
         input[0] = '\0';  /* Clear input buffer */
         
@@ -160,7 +173,7 @@ void tty_main(void)
         if (input[0] == '\0') {
             continue;
         }
-        
+        rtrim(input);
         /* Execute command */
         run_cmd();
     }
