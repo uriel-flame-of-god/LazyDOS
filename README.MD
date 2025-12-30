@@ -1,6 +1,6 @@
 # LazyDOS - The "Elegantly Simple" Operating System
 
-![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.3-lazy?style=for-the-badge)
+![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.3-lazy)
 ![License: GPL v3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Philosophy: Simplicity](https://img.shields.io/badge/Philosophy-Simplicity-blue.svg)
 ![Inspiration: MS-DOS](https://img.shields.io/badge/Inspiration-MS--DOS-00ff00.svg)
@@ -9,6 +9,13 @@
 > "Why make it complicated when simple works?"
 > 
 > *Inspired by the beautiful simplicity of MS-DOS*
+
+**Release v0.0.3 highlights:**
+- Stable TTY
+- Working LazyCalculator
+- Clean integer math
+- No spontaneous reboots
+
 
 ## 📋 Table of Contents
 - [The LazyDOS Philosophy](#the-lazydos-philosophy)
@@ -201,7 +208,7 @@ i686-elf-gcc -c src/kernel/core/kernel.c -o kernel.o -ffreestanding -O2
 # Create bootable ISO
 make iso
 
-# Output: lazydos.iso
+# Output: BetterDOS.iso
 # Size: Compact and efficient, just like DOS
 ```
 
@@ -217,7 +224,7 @@ make run
 make debug
 
 # With custom memory
-qemu-system-i386 -cdrom lazydos.iso -m 128M
+qemu-system-i386 -cdrom BetterDOS.iso -m 128M
 ```
 
 ### In Bochs (For Authenticity)
@@ -274,7 +281,7 @@ bochs -q -f bochsrc.txt
 ## ✅ Current Status: What Works Now
 
 ### Fully Functional:
-- ✅ **TTY Shell**: Complete with command history and editing
+- ✅ **TTY Shell**: Interactive input with backspace support
 - ✅ **Command Suite**: All commands work:
   - `help` - Shows available commands
   - `cfetch` - System information display
