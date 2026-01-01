@@ -18,7 +18,8 @@ OBJS	:= src/bootloader/boot.o \
 	   src/kernel/io/port.o \
 	   src/kernel/lib/string.o \
 	   src/kernel/lib/int.o \
-	   src/kernel/lib/float.o
+	   src/kernel/lib/float.o \
+	   src/kernel/apps/qbasic.o
 
 all: kernel.elf
 

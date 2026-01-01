@@ -1,7 +1,8 @@
-/*  TTY + integrated shell  –  LazyDOS “everything-in-one”  */
+/*  TTY + integrated shell  –  LazyDOS "everything-in-one"  */
 #include "../io/vga.h"
 #include "../io/keyboard.h"
-#include "../apps/calculator.h"   /* <-- updated path */
+#include "../apps/calculator.h"
+#include "../apps/qbasic.h"
 #include "../lib/string.h"
 #include "../io/port.h"
 #include <stdbool.h>
@@ -31,15 +32,16 @@ static void rtrim(char *s) {
 /*  ----------  commands  ----------  */
 static void cmd_help(void)
 {
-    println("LazyDOS v0.1 – Available commands:");
-    println("  help      – this screen");
-    println("  calc      – calculator");
-    println("  cfetch    – quick system info");
-    println("  info      – more details");
-    println("  reboot    – restart");
-    println("  shutdown  – power off (sort of)");
-    println("  clear     – clear screen");
-    println("  echo      – echo text");
+    println("LazyDOS v0.1 - Available commands:");
+    println("  help      - this screen");
+    println("  calc      - calculator");
+    println("  qbasic    - QBASIC interpreter");
+    println("  cfetch    - quick system info");
+    println("  info      - more details");
+    println("  reboot    - restart");
+    println("  shutdown  - power off (sort of)");
+    println("  clear     - clear screen");
+    println("  echo      - echo text");
 }
 
 static void cmd_cfetch(void)
@@ -54,7 +56,7 @@ static void cmd_cfetch(void)
     pr_ok_nl("     ########: ########::. #######::. ######::");
     pr_ok_nl("     ........::........::::.......::::......:::");
     println("");
-    println("LazyDOS v0.1        -  works well enough");
+    println("LazyDOS v0.0.5        -  works well enough");
     println("CPU : i486 (probably)");
     println("RAM : 640 KB conventional");
     println("Boot: Multiboot");
@@ -64,7 +66,7 @@ static void cmd_cfetch(void)
 static void cmd_info(void)
 {
     println("=== LazyDOS System Information ===");
-    println("Kernel Version : 0.1.0");
+    println("Kernel Version : 0.0.5");
     println("Architecture   : 32-bit x86");
     println("Boot Method    : Multiboot 1.0");
     println("Memory Layout  : 1 MB load, stack elsewhere");
@@ -95,18 +97,24 @@ static void cmd_clear(void)
 
 static void cmd_echo(void)
 {
-    /* echo everything after “echo ” until newline */
+    /* echo everything after "echo " until newline */
     char *p = input + 5;
     while (*p == ' ') p++;
     println(p);
 }
 
+
 /*  ----------  dispatcher  ----------  */
+
+
+static void qbasic_cmd(void) { qbasic_run(NULL); }
+
 typedef struct { const char *name; void (*fn)(void); } cmd_t;
 static const cmd_t cmds[] = {
     {"help",      cmd_help},
     {"calc",      calculator_run},
     {"calculator",calculator_run},
+    {"qbasic",    qbasic_cmd},
     {"cfetch",    cmd_cfetch},
     {"info",      cmd_info},
     {"reboot",    cmd_reboot},
@@ -127,8 +135,6 @@ static void run_cmd(void)
     println(input);
 }
 
-/*  ----------  main TTY loop  ----------  */
-/*  ----------  main TTY loop  ----------  */
 /*  ----------  main TTY loop  ----------  */
 void tty_main(void)
 {

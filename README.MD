@@ -1,6 +1,6 @@
 # LazyDOS - The "Elegantly Simple" Operating System
 
-![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.3-lazy)
+![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.5-lazy)
 ![License: GPL v3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Philosophy: Simplicity](https://img.shields.io/badge/Philosophy-Simplicity-blue.svg)
 ![Inspiration: MS-DOS](https://img.shields.io/badge/Inspiration-MS--DOS-00ff00.svg)
@@ -10,7 +10,13 @@
 > 
 > *Inspired by the beautiful simplicity of MS-DOS*
 
-**Release v0.0.3 highlights:**
+- Stable TTY
+- LazyCalculator (Integer Math)
+- QBASIC MINIMAL interpreter
+- Simple control flow (IF/THEN/ELSE)
+- LET variable assignment
+- PRINT statement support
+- No crashes, no reboots
 - Stable TTY
 - Working LazyCalculator
 - Clean integer math
@@ -103,6 +109,40 @@ calc> exit
 Returning to LazyDOS...
 ```
 
+### QBASIC Minimal Interpreter
+
+LazyDOS includes a minimal QBASIC interpreter for simple programming:
+#### **How to Use:**
+```
+LazyDOS> qbasic
+Welcome to LazyBASIC v1.0
+Type your BASIC program commands:
+
+> LET x = 5
+> LET y = 10
+> PRINT x + y
+> Ctrl+R
+
+Result:
+15
+
+> Ctrl+X
+Returning to LazyDOS...
+```
+
+#### **Supported Commands:**
+- `LET` - Variable assignment
+- `PRINT` - Output text and values
+- `IF/THEN/ELSE` - Simple control flow
+- `GOTO` - Jump to line numbers
+
+#### **Keyboard Shortcuts:**
+- **Ctrl+R**: Run the program
+- **Ctrl+X**: Exit and return to shell
+
+#### **Design Philosophy:**
+Minimal, simple BASIC for educational purposes - not a full implementation, but enough to run classic simple programs.
+
 #### **Design Philosophy:**
 LazyCalculator embodies the LazyDOS philosophy:
 1. **Simple**: No complex precedence rules (strict left-to-right)
@@ -119,6 +159,8 @@ src/
     ├── apps/
     │   ├── calculator.c    # ✅ LazyCalculator - Simple & Working!
     │   └── calculator.h
+    |   ├── qbasic.c # ✅ QBASIC Minimal - Working
+    |   └── qbasic.h
     ├── core/
     │   ├── gdt.c
     │   ├── gdt.h

@@ -1,12 +1,13 @@
-/* keyboard.c */
+/* keyboard.c – LazyDOS keyboard driver (ASCII Ctrl support) */
 #include "keyboard.h"
 #include "port.h"
+#include <stdint.h>
 
 #define PS2_STATUS 0x64
 #define PS2_DATA   0x60
-#define STAT_OBF   1             /* output buffer full */
+#define STAT_OBF   1   /* output buffer full */
 
-/* lazy tables – scancode set 1 */
+/* scancode set 1 */
 static const char normal[128] = {
     0,0,'1','2','3','4','5','6','7','8','9','0','-','=','\b','\t',
     'q','w','e','r','t','y','u','i','o','p','[',']','\n',0,'a','s',
@@ -29,7 +30,7 @@ static const char shifted[128] = {
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-/* lazy state */
+/* modifier state */
 static struct {
     uint8_t shift : 1;
     uint8_t ctrl  : 1;
@@ -37,21 +38,13 @@ static struct {
     uint8_t del   : 1;
 } state;
 
-static uint8_t last_sc;   /* last raw scancode */
+/* -------------------------------------------------- */
 
-/* ---------------------------------------------------------- */
 static int data_waiting(void)
 {
     return inb(PS2_STATUS) & STAT_OBF;
 }
 
-static uint8_t get_sc(void)
-{
-    while (!data_waiting());
-    return inb(PS2_DATA);
-}
-
-/* ---------------------------------------------------------- */
 int lazy_key_available(void)
 {
     return data_waiting();
@@ -59,49 +52,63 @@ int lazy_key_available(void)
 
 static void update_modifiers(uint8_t sc)
 {
-    /* break bit */
     if (sc & 0x80) {
         sc &= 0x7F;
         switch (sc) {
-        case 0x2A: case 0x36: state.shift = 0; break;
-        case 0x1D:             state.ctrl  = 0; break;
-        case 0x38:             state.alt   = 0; break;
-        case 0x53:             state.del   = 0; break;
+            case 0x2A: case 0x36: state.shift = 0; break;
+            case 0x1D:             state.ctrl  = 0; break;
+            case 0x38:             state.alt   = 0; break;
+            case 0x53:             state.del   = 0; break;
         }
     } else {
         switch (sc) {
-        case 0x2A: case 0x36: state.shift = 1; break;
-        case 0x1D:             state.ctrl  = 1; break;
-        case 0x38:             state.alt   = 1; break;
-        case 0x53:             state.del   = 1; break;
+            case 0x2A: case 0x36: state.shift = 1; break;
+            case 0x1D:             state.ctrl  = 1; break;
+            case 0x38:             state.alt   = 1; break;
+            case 0x53:             state.del   = 1; break;
         }
     }
-    last_sc = sc;
+}
+
+/* -------------------------------------------------- */
+
+char lazy_trygetchar(void)
+{
+    if (!data_waiting())
+        return 0;
+
+    uint8_t sc = inb(PS2_DATA);
+    update_modifiers(sc);
+
+    /* ignore key releases */
+    if (sc & 0x80)
+        return 0;
+
+    /* ASCII Ctrl mappings (minimal, explicit) */
+    if (state.ctrl) {
+        /* Ctrl+R */
+        if (sc == 0x13)    /* R */
+            return 0x12;   /* ASCII DC2 */
+
+        /* Ctrl+X */
+        if (sc == 0x2D)    /* X */
+            return 0x18;   /* ASCII CAN */
+    }
+
+    if (sc >= 128)
+        return 0;
+
+    const char *tbl = state.shift ? shifted : normal;
+    return tbl[sc];
 }
 
 char lazy_getchar(void)
 {
     char c;
     while (!(c = lazy_trygetchar()))
-        ;   /* spin like COMMAND.COM */
+        ;
     return c;
 }
-
-
-char lazy_trygetchar(void)
-{
-    if (!data_waiting()) return 0;
-
-    uint8_t sc = inb(PS2_DATA);
-    update_modifiers(sc);
-
-    if (sc & 0x80) return 0;
-    if (sc >= 128) return 0;
-
-    const char *tbl = state.shift ? shifted : normal;
-    return tbl[sc];
-}
-
 
 int lazy_is_ctrl_alt_del(void)
 {
