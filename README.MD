@@ -1,166 +1,101 @@
-# LazyDOS - The "Elegantly Simple" Operating System
+# LazyDOS v0.0.5 - New Year 2026 Release! 🎉
 
-![LazyDOS Logo](https://img.shields.io/badge/LazyDOS-v0.0.5-lazy)
-![License: GPL v3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)
-![Philosophy: Simplicity](https://img.shields.io/badge/Philosophy-Simplicity-blue.svg)
-![Inspiration: MS-DOS](https://img.shields.io/badge/Inspiration-MS--DOS-00ff00.svg)
-![Calculator: Working!](https://img.shields.io/badge/Calculator-✅_Working-green.svg)
+![New Year Release](https://img.shields.io/badge/Release-Jan_1,_2026-green)
+![QBASIC Added](https://img.shields.io/badge/QBASIC-✅_Working-blue)
+![Version: v0.0.5](https://img.shields.io/badge/Version-v0.0.5-orange)
 
-> "Why make it complicated when simple works?"
-> 
-> *Inspired by the beautiful simplicity of MS-DOS*
+## 🎉 What's New in v0.0.5 - The New Year Edition!
 
-- Stable TTY
-- LazyCalculator (Integer Math)
-- QBASIC MINIMAL interpreter
-- Simple control flow (IF/THEN/ELSE)
-- LET variable assignment
-- PRINT statement support
-- No crashes, no reboots
-- Stable TTY
-- Working LazyCalculator
-- Clean integer math
-- No spontaneous reboots
+Welcome to LazyDOS v0.0.5! Starting 2026 with a minimalist QBASIC interpreter that brings back the nostalgia of early programming while maintaining our core philosophy of simplicity.
 
+### ✨ Major Feature: QBASIC Minimal Interpreter
 
-## 📋 Table of Contents
-- [The LazyDOS Philosophy](#the-lazydos-philosophy)
-- [Name Origin](#-name-origin-not-laziness-but-simplicity)
-- [What's New in v0.0.3](#-whats-new-in-v003)
-- [🧮 LazyCalculator: The Star of v0.0.3](#-lazydos-applications)
-- [System Requirements](#system-requirements)
-- [Quick Start](#quick-start)
-- [Building from Source](#building-from-source)
-- [Running the System](#running-the-system)
-- [Architecture Overview](#architecture-overview)
-- [Known Issues](#known-issues)
-- [Current Status](#-current-status-what-works-now)
-- [Contributing (If You Must)](#contributing-if-you-must)
-- [FAQ (Frequently Avoided Questions)](#faq-frequently-avoided-questions)
-- [License](#license)
+We've added a minimal QBASIC interpreter that lets you write and run simple BASIC programs right in LazyDOS. It's intentionally minimal, educational, and true to the spirit of early BASIC implementations.
 
-## 🦥 The LazyDOS Philosophy
+## 🧰 QBASIC Features
 
-LazyDOS is built on one simple principle: **Elegant simplicity over unnecessary complexity**. Unlike other operating systems that bury you in abstractions, LazyDOS embraces directness. Here's what that means:
+### **Supported Commands:**
+- **`LET`** - Variable assignment (both integers and strings)
+- **`PRINT`** - Output text and variable values
+- **`INPUT`** - Get user input for variables
+- **`IF/THEN/ELSE`** - Basic conditional logic
+- **Expressions** - Simple variable evaluation in PRINT statements
 
-- **Direct hardware access**: Talk to the hardware like in the good old days
-- **Understandable code**: You can read and understand the entire system
-- **No bloat**: If it's not essential, it's not included
-- **Developer freedom**: The system gets out of your way so you can do real work
+### **How to Use:**
 
-We believe in **"Minimalist Open Source"** - we provide a clean, simple foundation that you can understand and build upon. It's not about being lazy; it's about being efficient!
-
-## 🏷️ Name Origin: Not Laziness, But Simplicity
-
-**Contrary to what you might think, LazyDOS isn't named because we're lazy developers.** The name comes from our admiration of **MS-DOS** and its beautifully simple architecture. Here's the real story:
-
-### The MS-DOS Inspiration
-Back in the golden age of computing (when memory was measured in kilobytes and computers beeped at you), MS-DOS showed us that an operating system could be:
-- **Simple**: No complex abstractions getting in your way
-- **Direct**: You talk to the hardware, the hardware talks back
-- **Understandable**: You could hold the entire system in your head
-- **Practical**: It got the job done with minimal fuss
-
-### Why "Lazy"DOS?
-We call it **LazyDOS** because:
-1. **MS-DOS was "lazy" in a good way** - it didn't overcomplicate things
-2. **It gets out of your way** - like a minimalist butler who knows when not to bother you
-3. **It embraces simplicity** - the "laziness" of elegant design
-4. **It's approachable** - you don't need a PhD to understand it
-
-Think of it as **MS-DOS's minimalist cousin who woke up in the 21st century**. We're not lazy; we're *efficiently minimalist*.
-
-## 🎉 What's New in v0.0.3
-
-### Major Feature: LazyCalculator is Born! 🧮
-The broken calculator from previous versions has been completely reimagined and reborn as **LazyCalculator** - a simple, reliable, integer-only calculator that actually works!
-
-## 🧮 LazyDOS Applications
-
-### LazyCalculator (NEW in v0.0.3)
-Meet LazyCalculator - the simple, reliable calculator that does exactly what you need and nothing more:
-
-#### **Key Features:**
-- **Integer-only operations**: No floating-point complexity
-- **Left-to-right evaluation**: Simple and predictable
-- **Basic arithmetic**: `+` `-` `*` `/` - all the essentials
-- **Safe division**: Division by zero protection built-in
-- **No crashes**: Proper error handling throughout
-- **No reboots needed**: Stable and reliable
-- **Clean interface**: Type `calc` and start calculating
-
-#### **How to Use:**
-```
-LazyDOS> calc
-Welcome to LazyCalculator v1.0
-Enter expressions like: 5 + 3 * 2
-Type 'exit' to return to shell
-
-calc> 10 + 5 * 2
-Result: 30
-
-calc> 20 / 4
-Result: 5
-
-calc> 10 / 0
-Error: Division by zero!
-
-calc> exit
-Returning to LazyDOS...
-```
-
-### QBASIC Minimal Interpreter
-
-LazyDOS includes a minimal QBASIC interpreter for simple programming:
-#### **How to Use:**
-```
+#### **Interactive Mode:**
+```basic
 LazyDOS> qbasic
-Welcome to LazyBASIC v1.0
-Type your BASIC program commands:
+=== QBASIC EDITOR (Ctrl+R: Run, Ctrl+X: Exit) ===
 
-> LET x = 5
-> LET y = 10
-> PRINT x + y
-> Ctrl+R
-
-Result:
-15
-
-> Ctrl+X
-Returning to LazyDOS...
+10 LET x = 5
+20 LET y = 10
+30 PRINT x + y
+40 IF x > 3 THEN PRINT "x is greater than 3"
+50 INPUT z
+60 PRINT "You entered: ", z
+70 LET message = "Hello LazyDOS!"
+80 PRINT message
 ```
 
-#### **Supported Commands:**
-- `LET` - Variable assignment
-- `PRINT` - Output text and values
-- `IF/THEN/ELSE` - Simple control flow
-- `GOTO` - Jump to line numbers
+#### **Run Your Program:**
+Press **Ctrl+R** to execute your BASIC program and see the output!
 
-#### **Keyboard Shortcuts:**
-- **Ctrl+R**: Run the program
-- **Ctrl+X**: Exit and return to shell
+#### **Exit the Editor:**
+Press **Ctrl+X** to return to the LazyDOS shell.
 
-#### **Design Philosophy:**
-Minimal, simple BASIC for educational purposes - not a full implementation, but enough to run classic simple programs.
+### **Variable Support:**
+- **Integer variables**: Automatically created with numeric assignments
+- **String variables**: Created when assigned string values (surrounded by quotes)
+- **Automatic type detection**: Variables are created with appropriate types based on assignment
 
-#### **Design Philosophy:**
-LazyCalculator embodies the LazyDOS philosophy:
-1. **Simple**: No complex precedence rules (strict left-to-right)
-2. **Reliable**: No crashes, proper error messages
-3. **Understandable**: You can read the entire source in 5 minutes
-4. **Useful**: Does the job without unnecessary features
+### **Conditional Logic Examples:**
+```basic
+IF x > 10 THEN PRINT "Large"
+IF y < 5 THEN PRINT "Small" ELSE PRINT "Not small"
+IF score >= 90 THEN PRINT "A grade"
+```
 
-### Project Structure Cleanup
+### **Keyboard Shortcuts:**
+- **Ctrl+R**: Run the current program
+- **Ctrl+X**: Exit QBASIC and return to LazyDOS
+- **Backspace**: Delete previous character
+- **Enter**: New line
+
+## 🎨 Design Philosophy
+
+Our QBASIC implementation follows the LazyDOS minimalist approach:
+
+1. **Educational Focus**: Learn programming concepts without complexity
+2. **No Line Numbers Required**: Free-form editing (though line numbers work if you use them)
+3. **Immediate Feedback**: See results immediately when you run
+4. **Understandable Implementation**: The entire interpreter is under 500 lines of clean C code
+
+### **What Makes It "Minimal":**
+- No GOSUB/RETURN (yet)
+- No FOR/NEXT loops (yet)
+- No arrays (yet)
+- No functions (yet)
+- No file I/O (yet)
+
+### **What Makes It "Useful":**
+- Perfect for learning programming basics
+- Great for simple calculations and text output
+- Teaches fundamental programming concepts
+- Nostalgic fun for those who remember early BASIC
+
+## 📁 Project Structure Update
+
 ```
 src/
 ├── bootloader/
 │   └── boot.asm
 └── kernel/
     ├── apps/
-    │   ├── calculator.c    # ✅ LazyCalculator - Simple & Working!
-    │   └── calculator.h
-    |   ├── qbasic.c # ✅ QBASIC Minimal - Working
-    |   └── qbasic.h
+    │   ├── calculator.c      # ✅ LazyCalculator - Fully Working!
+    │   ├── calculator.h
+    │   ├── qbasic.c         # ✅ NEW: QBASIC Minimal Interpreter
+    │   └── qbasic.h         # ✅ NEW: QBASIC Header
     ├── core/
     │   ├── gdt.c
     │   ├── gdt.h
@@ -183,166 +118,152 @@ src/
         └── string.h
 ```
 
-### Enhanced Stability
-- Improved TTY input handling
-- Better error messages throughout the system
-- More robust command parsing
-- Proper integer overflow handling in calculator
-
-## 🖥️ System Requirements
-
-### Minimal (It Will Boot)
-- **CPU**: i486 or better (or worse, we don't judge)
-- **RAM**: 640 KB conventional memory (we're nostalgic like that)
-- **Bootloader**: Anything that supports Multiboot 1.0 (or pretends to)
-- **Patience**: A moderate amount
-
-### Recommended (It Will Work Well)
-- **CPU**: Anything made after 1995
-- **RAM**: At least 1 MB (so we have somewhere to put our stack)
-- **Emulator**: QEMU or Bochs (because why not?)
-- **Expectations**: Realistic but positive
-- **Nostalgia**: For the days when software was understandable
-
-## 🚀 Quick Start
-
-### For the Impatient
+## 🚀 Quick Start with QBASIC
 
 ```bash
-# Clone the repository
+# Build and run LazyDOS v0.0.5
+make clean && make && make run
+
+# Once booted, launch QBASIC
+LazyDOS> qbasic
+
+# Try this simple program:
+LET a = 10
+LET b = 20
+PRINT a + b
+INPUT name
+PRINT "Hello, ", name
+IF a > 5 THEN PRINT "a is big!"
+```
+
+## 🔍 Technical Implementation Details
+
+### **Core Architecture:**
+- **Editor Buffer**: 5000 characters for program storage
+- **Variable Storage**: Up to 50 variables (mix of integers and strings)
+- **Line-by-Line Execution**: Simple interpreter loop
+- **Condition Parser**: Handles `>`, `<`, `=`, `>=`, `<=`, `<>` comparisons
+
+### **Memory Management:**
+- **Program Storage**: Static buffer (no dynamic allocation)
+- **Variable Table**: Fixed-size array
+- **String Values**: Fixed 128-character limit
+- **No Memory Leaks**: Simple, predictable memory usage
+
+### **Input/Output:**
+- **Keyboard Input**: Full support with backspace
+- **VGA Output**: Color-coded editor and output
+- **Error Handling**: Basic but functional
+- **No File System**: Programs exist only in memory (for now)
+
+## 🎯 Example Programs
+
+### **Simple Calculator:**
+```basic
+PRINT "Simple Calculator"
+INPUT "Enter first number: ", a
+INPUT "Enter second number: ", b
+PRINT "Sum: ", a + b
+PRINT "Difference: ", a - b
+PRINT "Product: ", a * b
+IF b <> 0 THEN PRINT "Quotient: ", a / b
+```
+
+### **Number Guessing Game:**
+```basic
+LET secret = 42
+PRINT "Guess the number (1-100)"
+INPUT guess
+IF guess = secret THEN PRINT "Correct!"
+IF guess > secret THEN PRINT "Too high!"
+IF guess < secret THEN PRINT "Too low!"
+```
+
+### **Interactive Greeting:**
+```basic
+PRINT "What's your name?"
+INPUT name
+PRINT "Hello, ", name, "!"
+PRINT "How old are you?"
+INPUT age
+IF age >= 18 THEN PRINT "You're an adult!"
+IF age < 18 THEN PRINT "You're a minor!"
+```
+
+## 📈 What's Next for QBASIC?
+
+### **Planned Features (Future Releases):**
+1. **Loops**: `FOR/NEXT` and `WHILE/WEND`
+2. **Arrays**: Simple numeric arrays
+3. **Functions**: `GOSUB/RETURN` for subroutines
+4. **More Math Functions**: `RND()`, `ABS()`, etc.
+5. **String Functions**: `LEN()`, `LEFT$()`, `RIGHT$()`
+6. **Program Storage**: Save/load simple programs
+7. **Line Number Support**: Full line number parsing
+8. **Error Messages**: Better diagnostics
+
+### **Long-term Vision:**
+- Create a complete but minimalist BASIC interpreter
+- Educational tool for learning programming
+- Run classic simple BASIC programs
+- Maintain the LazyDOS philosophy of simplicity
+
+## 🐛 Known Limitations (v0.0.5)
+
+### **Current Constraints:**
+1. **No Line Number Parsing**: Programs must be sequential
+2. **Simple Conditionals**: Only basic comparisons work
+3. **No Error Recovery**: Errors may leave interpreter in odd state
+4. **Limited String Support**: Basic string assignment only
+5. **No Program Save**: Programs lost on exit
+
+### **These Are Features (Not Bugs):**
+1. **Minimalist by Design**: We intentionally start small
+2. **Educational Focus**: Complexity added only when beneficial
+3. **Understandable Code**: You can read and understand the entire interpreter
+4. **DOS Tradition**: Early BASIC versions were similarly limited
+
+## 🎊 Celebrating 2026!
+
+This release marks our commitment to continuous improvement. While QBASIC v0.0.5 is minimal, it's a solid foundation that:
+
+1. **Actually Works**: You can write and run programs
+2. **Teaches Fundamentals**: Variables, I/O, conditionals
+3. **Maintains Simplicity**: No unnecessary complexity
+4. **Sets Direction**: Clear path for future enhancements
+
+## 🙏 New Year's Resolution
+
+For 2026, LazyDOS resolves to:
+- **Stay Simple**: Resist the temptation to over-engineer
+- **Stay Educational**: Help people learn how computers really work
+- **Stay Fun**: Keep the joy of computing alive
+- **Stay Open**: Continue sharing our journey transparently
+
+## 🚀 Try It Today!
+
+```bash
+# Get the latest version
 git clone https://github.com/uriel-flame-of-god/LazyDOS.git
 cd lazydos
 
-# Build it (it actually works now)
+# Build v0.0.5
+make clean
 make
 
-# Run it and try the new calculator!
+# Run and explore QBASIC
 make run
 
-# Once booted, type:
-LazyDOS> calc
+# In LazyDOS:
+LazyDOS> qbasic
 ```
 
-## 🔨 Building from Source
+## 📚 Learning Resources
 
-### Step 1: Get the Tools
-
-You'll need:
-- **NASM** (for the bootloader)
-- **GCC Cross-Compiler** (i686-elf target)
-- **Make** (or patience to run commands manually)
-
-### Step 2: The Build Process
-
-```bash
-# The easy way (recommended)
-make all
-
-# Or step by step
-nasm -f elf32 src/bootloader/boot.asm -o boot.o
-i686-elf-gcc -c src/kernel/core/kernel.c -o kernel.o -ffreestanding -O2
-# ... and so on
-```
-
-### Step 3: Create the ISO
-
-```bash
-# Create bootable ISO
-make iso
-
-# Output: BetterDOS.iso
-# Size: Compact and efficient, just like DOS
-```
-
-## 🏃 Running the System
-
-### In QEMU (Recommended)
-
-```bash
-# Basic run
-make run
-
-# With debug output
-make debug
-
-# With custom memory
-qemu-system-i386 -cdrom BetterDOS.iso -m 128M
-```
-
-### In Bochs (For Authenticity)
-
-```bash
-# Configure and run
-bochs -q -f bochsrc.txt
-```
-
-### On Real Hardware (Adventurous)
-1. Burn ISO to USB/CD
-2. Boot from it
-3. Enjoy the simplicity (and try the calculator!)
-
-## 🏗️ Architecture Overview
-
-### Boot Process (Simple and Reliable)
-1. **boot.asm**: Multiboot header + basic setup
-2. **GDT**: Global Descriptor Table (works properly)
-3. **Kernel Entry**: Clean jump to C code
-
-### Kernel Components
-
-#### Core (Functional and Clean)
-- **kernel.c**: Main entry point, initializes everything
-- **gdt.c**: Segmentation setup (simple but effective)
-- **tty.c**: Integrated shell (where the magic happens)
-
-#### I/O Drivers (They Work)
-- **vga.c**: Text mode driver (80×25, classic and reliable)
-- **keyboard.c**: PS/2 keyboard driver (responsive)
-- **port.c**: I/O port helpers (actually useful)
-
-#### Applications (Useful and Working!)
-- **calculator.c**: LazyCalculator - simple integer arithmetic (✅ **FULLY WORKING!**)
-- Left-to-right evaluation with error handling
-
-#### Libc Subset (Just Enough)
-- **string.c**: Essential string functions
-- **int.c**: Integer utilities for the calculator
-
-## 🐛 Known Issues
-
-### Minor Quirks (DOS Had Them Too)
-1. **Backspace**: Works but might have edge cases
-2. **Memory**: Still no advanced memory manager (by design)
-3. **No multitasking**: Single-tasking, just like early DOS
-
-### Philosophical Choices (Not Bugs)
-1. **No IDT**: Interrupts handled simply
-2. **No PMM/VMM**: Direct memory access
-3. **No ACPI**: Simplicity over power management
-
-## ✅ Current Status: What Works Now
-
-### Fully Functional:
-- ✅ **TTY Shell**: Interactive input with backspace support
-- ✅ **Command Suite**: All commands work:
-  - `help` - Shows available commands
-  - `cfetch` - System information display
-  - `info` - Detailed system info
-  - `reboot` - Restarts the system
-  - `shutdown` - Powers off (in emulator)
-  - `clear` - Clears the screen
-  - `echo` - Echoes text back
-  - `calc` - 🧮 **LazyCalculator (FULLY WORKING!)**
-- ✅ **I/O Systems**: VGA output and keyboard input
-- ✅ **Basic Utilities**: String and math functions
-
-### LazyCalculator (The Star of v0.0.3):
-The calculator has been completely reworked into a reliable, simple tool:
-- **Integer-only**: No floating point complexity
-- **Left-to-right evaluation**: Simple and predictable
-- **Safe operations**: Division by zero protection
-- **Error handling**: Clear error messages, no crashes
-- **Clean interface**: Easy to use, easy to understand
+Want to learn more about BASIC programming? Check out:
+- [The BASIC Programming Language (Wikipedia)](https://en.wikipedia.org/wiki/BASIC)
+- [QBASIC Programming for Kids](https://www.qbasic.net)
+- [Classic BASIC Games](https://github.com/coding-horror/basic-computer-games)
 
 ## 🤝 Contributing (Welcome!)
 
@@ -364,6 +285,12 @@ We welcome contributions that maintain our philosophy of simplicity:
 - Over-engineering
 - Unnecessary abstractions
 - Breaking the simplicity philosophy
+
+### Wanted Features:
+1. `FOR/NEXT` loop implementation
+2. `GOSUB/RETURN` subroutine support
+3. Better error messages
+4. Example programs
 
 ## ❓ FAQ (Frequently Asked Questions)
 
@@ -403,22 +330,19 @@ We welcome contributions that maintain our philosophy of simplicity:
 
 ## 🎯 Final Thoughts
 
-LazyDOS v0.0.3 represents a significant milestone: we now have a useful application that embodies our philosophy. LazyCalculator isn't just a fixed calculator - it's a statement about what we believe in:
+LazyDOS v0.0.5 represents our ongoing commitment to creating understandable, minimalist software. The QBASIC interpreter may be simple, but it:
 
-1. **Simplicity**: Integer-only, left-to-right evaluation
-2. **Reliability**: Proper error handling, no crashes
-3. **Usefulness**: Does the job without unnecessary complexity
-4. **Understandability**: You can read and understand the entire implementation
+1. **Works reliably**: No crashes during normal use
+2. **Teaches effectively**: Perfect for programming beginners
+3. **Honors tradition**: Follows in the footsteps of early microcomputer BASIC
+4. **Points forward**: A foundation we can build upon
 
-In a world of bloated software with countless features you'll never use, LazyCalculator is a breath of fresh air. It does one thing, and does it well.
-
-**Try it. Type `calc`. Experience the joy of software that just works, simply.**
-
-Happy calculating! (And remember: 10 + 5 * 2 = 30, because we evaluate left-to-right!)
+**Happy New Year 2026 from the LazyDOS team! May your code be simple, your bugs few, and your understanding deep.**
 
 ---
-*"Simplicity is the ultimate sophistication." - Leonardo da Vinci*
-*"640K ought to be enough for anybody." - Bill Gates (allegedly)*
-*"Make it work, make it right, make it simple." - The LazyDOS Philosophy*
 
-**LazyDOS v0.0.3 - Now with LazyCalculator: Simple, Reliable, and Actually Works!** 🧮
+*"The computer revolution hasn't started yet. Don't be misled by the enormous flow of money into bad defacto standards." - Alan Kay*
+*"Simplicity is prerequisite for reliability." - Edsger W. Dijkstra*
+*"Happy New Year! Let's make 2026 the year of simple, understandable software." - The LazyDOS Team*
+
+**LazyDOS v0.0.5 - Now with Minimalist QBASIC: Start 2026 with Simple Programming!** 🎉

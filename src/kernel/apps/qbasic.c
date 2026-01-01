@@ -253,6 +253,8 @@ static void execute_input(char *args)
     }
 }
 
+static void execute_line(char *line);
+
 static bool eval_condition(char *cond)
 {
     cond = trim_start(cond);
