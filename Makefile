@@ -13,6 +13,7 @@ OBJS	:= src/bootloader/boot.o \
 	   src/kernel/core/gdt.o \
 	   src/kernel/core/tty.o \
 	   src/kernel/apps/calculator.o \
+	   src/kernel/apps/wog.o \
 	   src/kernel/io/keyboard.o \
 	   src/kernel/io/vga.o \
 	   src/kernel/io/port.o \

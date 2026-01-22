@@ -63,3 +63,10 @@ void* memmove(void* dest, const void* src, size_t n) {
     // Return the destination pointer
     return dest;
 }
+
+int strncmp(const char* a, const char* b, size_t n)
+{
+    while (n-- && *a && *a == *b) { ++a; ++b; }
+    if (n == (size_t)-1) return 0;
+    return *(unsigned char*)a - *(unsigned char*)b;
+}

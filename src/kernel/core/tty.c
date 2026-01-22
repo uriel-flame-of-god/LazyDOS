@@ -3,6 +3,7 @@
 #include "../io/keyboard.h"
 #include "../apps/calculator.h"
 #include "../apps/qbasic.h"
+#include "../apps/wog.h"
 #include "../lib/string.h"
 #include "../io/port.h"
 #include <stdbool.h>
@@ -34,8 +35,9 @@ static void cmd_help(void)
 {
     println("LazyDOS v0.1 - Available commands:");
     println("  help      - this screen");
-    println("  calc      - calculator");
-    println("  qbasic    - QBASIC interpreter");
+    println("  calc      - Calculator");
+    println("  qbasic    - QBASIC Interpreter");
+    println("  wog       - Word of God Interpreter");
     println("  cfetch    - quick system info");
     println("  info      - more details");
     println("  reboot    - restart");
@@ -86,6 +88,7 @@ static void cmd_reboot(void)
 static void cmd_shutdown(void)
 {
     println("Shutdown - please power-off manually.");
+    outb(0x64, 0x2000);
     /* QEMU/BOCHS shortcut if you want: outw(0x604, 0x2000); */
     for(;;) asm volatile ("hlt");
 }
@@ -115,6 +118,7 @@ static const cmd_t cmds[] = {
     {"calc",      calculator_run},
     {"calculator",calculator_run},
     {"qbasic",    qbasic_cmd},
+    {"wog",       wog_run},
     {"cfetch",    cmd_cfetch},
     {"info",      cmd_info},
     {"reboot",    cmd_reboot},

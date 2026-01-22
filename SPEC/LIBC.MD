@@ -7,7 +7,7 @@ We implement only what we need, in the simplest way possible. No bloat, no unnec
 
 ## What We Provide
 Just enough to write a kernel and simple applications:
-- **String functions**: `strlen`, `strcpy`, `strcmp`
+- **String functions**: `strlen`, `strcpy`, `strcmp`, `strncmp`
 - **Memory functions**: `memset`, `memcpy`, `memmove`
 - **Integer math**: Division and modulus
 - **No standard library**: We write our own
